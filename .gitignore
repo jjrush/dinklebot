@@ -1,7 +1,8 @@
 # Discord stuff
 *.env
-config.json
-
+config-maethrillian.json
+config-muffin.json
+token.json
 
 # Logs
 logs

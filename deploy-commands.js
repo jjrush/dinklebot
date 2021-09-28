@@ -1,10 +1,9 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { clientId, guildId, token } = require('./config.json');
-
-// console.log(clientId);
-// console.log(guildId);
+const { maethClientId, maethGuildId } = require('./config-maethrillian.json');
+const { muffinClientId, muffinGuildId } = require('./config-muffin.json');
+const { token } = require('./token.json');
 
 const commands = [
 	new SlashCommandBuilder().setName('ping').setDescription('Replies with pong!'),
@@ -14,6 +13,10 @@ const commands = [
 
 const rest = new REST({ version: '9' }).setToken(token);
 
-rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
+rest.put(Routes.applicationGuildCommands(maethClientId, maethGuildId), { body: commands })
+	.then(() => console.log('Successfully registered application commands.'))
+	.catch(console.error);
+
+rest.put(Routes.applicationGuildCommands(muffinClientId, muffinGuildId), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
 	.catch(console.error);
